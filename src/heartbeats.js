@@ -1,5 +1,7 @@
+// 心跳服务
+
 import axios from 'axios';
-import config from './config.js';
+import config from '../config.js';
 
 function reqHeartBeat() {
     axios

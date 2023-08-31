@@ -1,6 +1,8 @@
+// 推送钉钉消息
+
 import request from 'request';
 import crypto from 'crypto';
-import config from './config.js';
+import config from '../config.js';
 
 function pushDingDing(title, text) {
     const data = {
