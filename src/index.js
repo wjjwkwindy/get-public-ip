@@ -31,16 +31,10 @@ async function monitorIP() {
   let week = weekArray[dayjs().day()];
   let currentDay = new Date().getDay();
 
-  //   读取文件中记录的IP
-  readLog()
-    .then((data) => {
-      logIp = data.ip;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  // 发送心跳服务
+  reqHeartBeat();
 
-  //   监控
+  // 判断IP变动次数
   if (ipChangeCount >= 5) {
     if (currentDay === globalDay) {
       // 当天IP地址变动超过5次
@@ -67,12 +61,19 @@ async function monitorIP() {
     }
   }
 
+  // 读取日志中记录的IP
+  readLog()
+    .then((data) => {
+      logIp = data.ip;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  // 监控IP
   console.time("获取ip花费时间");
   let currentIp = await publicIpv4();
 
-  reqHeartBeat();
-
-  // 启动脚本时发送ip
   if (logIp === "") {
     logIp = currentIp;
     globalDay = currentDay;
