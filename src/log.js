@@ -3,7 +3,7 @@
 import fs from "fs";
 import readline from "readline";
 
-const logFile = "log.txt";
+const logFile = "../log.txt";
 
 /**
  * 写入日志
